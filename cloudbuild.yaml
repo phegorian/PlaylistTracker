@@ -14,21 +14,20 @@ steps:
   - deploy
   - playlist-tracker-backend # Name of your backend Cloud Run service
   - --image=gcr.io/${PROJECT_ID}/playlist-tracker-backend:latest
-  - --region=europe-west2 # Choose your desired region (e.g., us-central1, europe-west1, etc.)
+  - --region=europe-west2 # <--- CHANGE THIS TO MATCH YOUR TRIGGER REGION
   - --platform=managed
-  - --allow-unauthenticated # Set this to allow public access, or remove if you handle authentication differently
-  - --port=5000 # The port your Node.js backend listens on
-  - --set-env-vars=DB_URI=${_DB_URI},JWT_SECRET=${_JWT_SECRET},YOUTUBE_API_KEY=${_YOUTUBE_API_KEY} # Add your backend environment variables here
-  - --timeout=900 # Extend timeout for initial deployment if needed (in seconds)
-  - --cpu=1 # Allocate 1 CPU
-  - --memory=512Mi # Allocate 512MB memory
-  - --max-instances=2 # Maximum instances
-  - --min-instances=0 # Minimum instances
+  - --allow-unauthenticated
+  - --port=5000
+  - --set-env-vars=DB_URI=${_DB_URI},JWT_SECRET=${_JWT_SECRET},YOUTUBE_API_KEY=${_YOUTUBE_API_KEY}
+  - --timeout=900
+  - --cpu=1
+  - --memory=512Mi
+  - --max-instances=2
+  - --min-instances=0
   - --project=${PROJECT_ID}
   id: Deploy Backend Service
 
 # 3. Get the URL of the deployed Backend Service
-# This step will save the backend service URL to a file, which can then be read by a later step.
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   args:
   - gcloud
@@ -37,7 +36,7 @@ steps:
   - describe
   - playlist-tracker-backend
   - --platform=managed
-  - --region=us-central1 # Make sure this matches the backend deployment region
+  - --region=europe-west2 # <--- CHANGE THIS TO MATCH YOUR TRIGGER REGION
   - --format=value(status.url)
   - --project=${PROJECT_ID}
   id: Get Backend URL
@@ -45,7 +44,7 @@ steps:
   script: |
     gcloud run services describe playlist-tracker-backend \
       --platform=managed \
-      --region=us-central1 \
+      --region=europe-west2 \ # <--- CHANGE THIS TO MATCH YOUR TRIGGER REGION
       --format='value(status.url)' \
       --project=${PROJECT_ID} > /workspace/backend_url.txt
 
@@ -63,7 +62,7 @@ steps:
   - deploy
   - playlist-tracker-frontend # Name of your frontend Cloud Run service
   - --image=gcr.io/${PROJECT_ID}/playlist-tracker-frontend:latest
-  - --region=us-central1 # Choose your desired region, must be same as backend region or choose based on latency
+  - --region=europe-west2 # <--- CHANGE THIS TO MATCH YOUR TRIGGER REGION
   - --platform=managed
   - --allow-unauthenticated
   - --port=80 # Nginx in frontend Dockerfile exposes port 80
