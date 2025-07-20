@@ -1,0 +1,274 @@
+/* frontend/src/components/ScheduledTasksManager.css */
+
+.scheduled-tasks-manager {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  margin: 30px auto;
+  max-width: 800px;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+}
+
+.scheduled-tasks-manager h2 {
+  text-align: center;
+  color: #007bff;
+  margin-bottom: 30px;
+  font-size: 2em;
+}
+
+.scheduled-tasks-manager h3 {
+  color: #007bff;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #e9ecef;
+  padding-bottom: 10px;
+}
+
+.info-message,
+.error-message {
+  padding: 10px 15px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.info-message {
+  background-color: #e0f7fa;
+  color: #00796b;
+}
+
+.error-message {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+/* Form Styles */
+.task-form, .edit-task-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #fcfcfc;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.task-form input[type="text"],
+.edit-task-form input[type="text"],
+.edit-task-form select {
+  padding: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  font-size: 1em;
+  transition: border-color 0.2s ease;
+}
+
+.task-form input[type="text"]:focus,
+.edit-task-form input[type="text"]:focus,
+.edit-task-form select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.submit-button,
+.update-button,
+.cancel-button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: bold;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.submit-button {
+  background-color: #28a745; /* Green for create */
+  color: white;
+}
+
+.submit-button:hover:not(:disabled) {
+  background-color: #218838;
+  transform: translateY(-1px);
+}
+
+.submit-button:disabled {
+    background-color: #a0a0a0;
+    cursor: not-allowed;
+}
+
+.edit-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.update-button {
+  background-color: #007bff; /* Blue for update */
+  color: white;
+}
+
+.update-button:hover:not(:disabled) {
+  background-color: #0056b3;
+  transform: translateY(-1px);
+}
+
+.update-button:disabled {
+    background-color: #a0a0a0;
+    cursor: not-allowed;
+}
+
+.cancel-button {
+  background-color: #6c757d; /* Grey for cancel */
+  color: white;
+}
+
+.cancel-button:hover:not(:disabled) {
+  background-color: #5a6268;
+  transform: translateY(-1px);
+}
+
+/* Task List Styles */
+.task-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 20px;
+}
+
+.task-item {
+  background-color: #fefefe;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  position: relative;
+}
+
+.task-details p {
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.task-details p strong {
+  color: #333;
+  min-width: 100px;
+  display: inline-block;
+}
+
+.task-status {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+.task-status.active {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.task-status.paused {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.task-status.error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.task-actions {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.task-actions button {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: background-color 0.2s ease;
+}
+
+.edit-button {
+  background-color: #ffc107; /* Yellow for edit */
+  color: #333;
+}
+
+.edit-button:hover {
+  background-color: #e0a800;
+}
+
+.delete-button {
+  background-color: #dc3545; /* Red for delete */
+  color: white;
+}
+
+.delete-button:hover {
+  background-color: #c82333;
+}
+
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+/* Style for the conditional schedule options */
+.schedule-options {
+  display: flex;
+  flex-wrap: wrap; /* Allows items to wrap on smaller screens */
+  gap: 10px; /* Space between elements */
+  align-items: center; /* Align items vertically in the middle */
+  padding: 10px;
+  background-color: #f7f9fc;
+  border: 1px dashed #d0d0d0;
+  border-radius: 5px;
+  margin-top: -10px; /* Pull it up closer to the dropdown */
+}
+
+.schedule-options label {
+    margin-right: 5px;
+    white-space: nowrap; /* Keep label on one line */
+    font-weight: normal; /* Less bold than main labels */
+    color: #666;
+}
+
+.schedule-options input[type="time"],
+.schedule-options input[type="number"],
+.schedule-options select {
+    flex: 1;
+    min-width: 80px;
+    padding: 8px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    font-size: 0.95em;
+}
+
+.task-form input[type="text"],
+.edit-task-form select {
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: border-color 0.2s ease;
+}

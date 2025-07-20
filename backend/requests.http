@@ -1,0 +1,46 @@
+### Register a new user (if you haven't)
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "authuser",
+  "email": "auth@example.com",
+  "password": "authpassword"
+}
+
+### Login to get a token
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "auth@example.com",
+  "password": "authpassword"
+}
+
+### Capture a playlist (REQUIRES TOKEN)
+# Replace <YOUR_TOKEN> with the token from the login response.
+# Replace <PLAYLIST_URL> with a real YouTube playlist URL.
+POST http://localhost:5000/api/playlists/capture
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4N2QwNjgxNzA0ODg2ZDVkYTMxY2UxZSIsImlhdCI6MTc1MzAyNDMxNCwiZXhwIjoxNzUzMDI3OTE0fQ.5Zig1zXuIycm6jm7CFZx_9OjDSiLHwspRhn3zajoxdY
+
+{
+  "playlistUrl": "https://www.youtube.com/playlist?list=PL123C2567698C4237"
+}
+
+### Get all snapshots for a specific playlist (REQUIRES TOKEN, will be empty if new user)
+# Replace <YOUR_TOKEN> with the token from the login response.
+# Replace <PLAYLIST_ID> with the ID from the captured playlist URL.
+GET http://localhost:5000/api/playlists/PL123C2567698C4237/snapshots
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4N2QwNjgxNzA0ODg2ZDVkYTMxY2UxZSIsImlhdCI6MTc1MzAyNDMxNCwiZXhwIjoxNzUzMDI3OTE0fQ.5Zig1zXuIycm6jm7CFZx_9OjDSiLHwspRhn3zajoxdY
+
+### Get single snapshot (REQUIRES TOKEN, will fail if new user and no snapshot)
+# Replace <YOUR_TOKEN> with the token from the login response.
+# Replace <SNAPSHOT_ID> with an _id from a previous capture.
+GET http://localhost:5000/api/snapshots/687d0776704886d5da31ce26
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4N2QwNjgxNzA0ODg2ZDVkYTMxY2UxZSIsImlhdCI6MTc1MzAyNDMxNCwiZXhwIjoxNzUzMDI3OTE0fQ.5Zig1zXuIycm6jm7CFZx_9OjDSiLHwspRhn3zajoxdY
+
+### Get unique playlists overview (NEW ENDPOINT, REQUIRES TOKEN)
+# Replace <YOUR_TOKEN> with the token from the login response.
+GET http://localhost:5000/api/playlists/overview
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4N2QwNjgxNzA0ODg2ZDVkYTMxY2UxZSIsImlhdCI6MTc1MzAyNDMxNCwiZXhwIjoxNzUzMDI3OTE0fQ.5Zig1zXuIycm6jm7CFZx_9OjDSiLHwspRhn3zajoxdY

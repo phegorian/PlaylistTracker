@@ -1,0 +1,102 @@
+/* frontend/src/components/AuthForm.css */
+
+.auth-form-container {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: 40px auto;
+  text-align: center;
+}
+
+.auth-form-container h2 {
+  color: #007bff;
+  margin-bottom: 25px;
+  font-size: 2em;
+}
+
+.auth-form .form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.auth-form .form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #555;
+}
+
+.auth-form .form-input {
+  width: calc(100% - 20px); /* Account for padding */
+  padding: 12px 10px;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  font-size: 1.1em;
+  box-sizing: border-box; /* Include padding in width */
+}
+
+.auth-form .form-input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  outline: none;
+}
+
+.auth-button {
+  background-color: #007bff;
+  color: white;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1.2em;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  width: 100%;
+  margin-top: 15px;
+}
+
+.auth-button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+.auth-button:active {
+  transform: translateY(0);
+}
+
+.error-message {
+  color: #dc3545;
+  margin-top: 15px;
+  font-weight: bold;
+  font-size: 0.95em;
+}
+
+.success-message {
+  color: #28a745;
+  margin-top: 15px;
+  font-weight: bold;
+  font-size: 0.95em;
+}
+
+.toggle-auth-mode {
+  margin-top: 20px;
+  font-size: 0.95em;
+  color: #666;
+}
+
+.toggle-auth-mode button {
+  background: none;
+  border: none;
+  color: #007bff;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 1em;
+  padding: 0;
+  margin-left: 5px;
+}
+
+.toggle-auth-mode button:hover {
+  color: #0056b3;
+}

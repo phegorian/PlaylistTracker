@@ -1,0 +1,57 @@
+/* frontend/src/components/ImportSnapshot.css */
+
+.import-snapshot-container {
+  background-color: #f8f9fa;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  margin-top: 30px;
+  text-align: center;
+  border: 1px dashed #ced4da; /* Dashed border for visual cue */
+}
+
+.import-snapshot-container h3 {
+  color: #007bff;
+  margin-bottom: 15px;
+  font-size: 1.6em;
+}
+
+.import-snapshot-container p {
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.file-input {
+  display: block;
+  width: fit-content;
+  margin: 0 auto 15px auto;
+  padding: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  background-color: #ffffff;
+  cursor: pointer;
+}
+
+.file-input:hover {
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.1rem rgba(0, 123, 255, 0.1);
+}
+
+.file-input:disabled {
+    background-color: #e9ecef;
+    cursor: not-allowed;
+}
+
+.error-message {
+  color: #dc3545;
+  margin-top: 15px;
+  font-weight: bold;
+  font-size: 0.95em;
+}
+
+.success-message {
+  color: #28a745;
+  margin-top: 15px;
+  font-weight: bold;
+  font-size: 0.95em;
+}
