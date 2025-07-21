@@ -1,5 +1,5 @@
 # Stage 1: Build the Node.js application
-FROM node:current-alpine AS builder
+FROM node:24-alpine AS builder
 
 # Set working directory inside the container
 WORKDIR /app
@@ -8,7 +8,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies
-RUN npm install --production
+RUN npm install --omit=dev
 
 # Copy the rest of the application code
 COPY . .
