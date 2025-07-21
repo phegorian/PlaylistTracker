@@ -14,7 +14,7 @@ RUN npm install --omit=dev
 COPY . .
 
 # Stage 2: Run the Node.js application
-FROM node:18-alpine
+FROM node:24-alpine
 
 WORKDIR /app
 
