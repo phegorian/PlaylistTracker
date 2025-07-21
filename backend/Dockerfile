@@ -24,6 +24,7 @@ COPY --from=builder /app/server.js .
 COPY --from=builder /app/routes ./routes
 COPY --from=builder /app/models ./models
 COPY --from=builder /app/middleware ./middleware
+COPY --from=builder /app/services ./services
 
 # Expose the port your backend runs on (e.g., 5000)
 EXPOSE 5000
