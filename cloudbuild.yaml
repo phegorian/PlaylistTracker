@@ -34,12 +34,14 @@ steps:
 # 2. Get the URL of the deployed Backend Service
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   id: Get Backend URL
+  env:
+    - 'PROJECT_ID=${PROJECT_ID}'
   script: |
     gcloud run services describe playlist-tracker-backend \
       --platform=managed \
       --region=europe-west1 \
       --format='value(status.url)' \
-      --project=${PROJECT_ID} > /workspace/backend_url.txt
+      --project=$PROJECT_ID > /workspace/backend_url.txt
 
 
 # 3. Build Frontend Docker Image
