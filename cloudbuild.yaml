@@ -4,13 +4,14 @@ steps:
 # 0. Build Backend Docker Image
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-t', 'gcr.io/${PROJECT_ID}/playlist-tracker-backend:latest', './backend']
-  dir: '.' # Execute from the project root
+  dir: '.'
 
+# 1. Explicitly Push Backend Image
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'gcr.io/${PROJECT_ID}/playlist-tracker-backend:latest']
   id: Push Backend Image # Give this step an ID for clarity
 
-# 1. Deploy Backend to Cloud Run (This step's index will now be 2)
+# 2. Deploy Backend to Cloud Run (This step's index will now be 2)
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   args:
   - gcloud
@@ -31,7 +32,7 @@ steps:
   - --project=${PROJECT_ID}
   id: Deploy Backend Service
 
-# 2. Get the URL of the deployed Backend Service
+# 3. Get the URL of the deployed Backend Service
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   id: Get Backend URL
   env:
@@ -44,16 +45,17 @@ steps:
       --project=$PROJECT_ID > /workspace/backend_url.txt
 
 
-# 3. Build Frontend Docker Image
+# 4. Build Frontend Docker Image
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-t', 'gcr.io/${PROJECT_ID}/playlist-tracker-frontend:latest', './frontend']
   dir: '.'
 
+# 5. Explicitly Push Frontend Image
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'gcr.io/${PROJECT_ID}/playlist-tracker-frontend:latest']
   id: Push Frontend Image
 
-# 4. Deploy Frontend to Cloud Run
+# 6. Deploy Frontend to Cloud Run
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   args:
   - gcloud
