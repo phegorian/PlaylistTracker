@@ -2,7 +2,8 @@
 
 import React, { useState, useRef } from 'react';
 import { useAuth } from '../context/AuthContext';
-import './ImportSnapshot.css'; // We'll create this CSS file
+import { API_BASE_URL } from '../apiConfig';
+import './ImportSnapshot.css';
 
 function ImportSnapshot({ onSnapshotImported }) {
   const [loading, setLoading] = useState(false);
@@ -44,7 +45,7 @@ function ImportSnapshot({ onSnapshotImported }) {
           }
 
 
-          const response = await fetch('http://localhost:5000/api/snapshots/import', {
+          const response = await fetch(`${API_BASE_URL}/api/snapshots/import`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

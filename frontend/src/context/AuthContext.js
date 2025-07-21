@@ -1,6 +1,7 @@
 // frontend/src/context/AuthContext.js
 
 import React, { createContext, useState, useEffect, useContext } from 'react';
+import { API_BASE_URL } from '../apiConfig';
 
 const AuthContext = createContext(null);
 
@@ -27,7 +28,7 @@ export const AuthProvider = ({ children }) => {
   }, [token]);
 
   const login = async (email, password) => {
-    const response = await fetch('http://localhost:5000/api/auth/login', {
+    const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password }),
@@ -45,7 +46,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const register = async (username, email, password) => {
-    const response = await fetch('http://localhost:5000/api/auth/register', {
+    const response = await fetch(`${API_BASE_URL}/api/auth/register`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, email, password }),

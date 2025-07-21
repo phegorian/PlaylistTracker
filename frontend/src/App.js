@@ -10,6 +10,7 @@ import Login from './components/Login';
 import ImportSnapshot from './components/ImportSnapshot';
 import ScheduledTasksManager from './components/ScheduledTasksManager';
 import { useAuth } from './context/AuthContext';
+import { API_BASE_URL } from './apiConfig';
 
 function App() {
   const { user, isAuthenticated, logout, token } = useAuth();
@@ -18,7 +19,8 @@ function App() {
   const [snapshotsToCompareIds, setSnapshotsToCompareIds] = useState(null);
   const [showRegister, setShowRegister] = useState(false);
   const [showImportModal, setShowImportModal] = useState(false);
-  const [showScheduleModal, setShowScheduleModal] = useState(false); // <--- NEW: State for schedule modal visibility
+  const [showScheduleModal, setShowScheduleModal] = useState(false);
+
 
   const fetchUserPlaylistsOverview = useCallback(async () => {
     if (!isAuthenticated || !token) {
@@ -26,7 +28,7 @@ function App() {
       return;
     }
     try {
-      const response = await fetch('http://localhost:5000/api/playlists/overview', {
+      const response = await fetch(`${API_BASE_URL}/api/playlists/overview`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../context/AuthContext';
+import { API_BASE_URL } from '../apiConfig';
 import { getPlaylistIdFromUrl } from '../utils/playlistUtils';
 import './ScheduledTasksManager.css';
 
@@ -124,7 +125,7 @@ function ScheduledTasksManager({ onClose }) {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch('http://localhost:5000/api/scheduled-tasks', {
+      const response = await fetch(`${API_BASE_URL}/api/scheduled-tasks`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -192,7 +193,7 @@ function ScheduledTasksManager({ onClose }) {
     }
 
     try {
-      const response = await fetch('http://localhost:5000/api/scheduled-tasks', {
+      const response = await fetch(`${API_BASE_URL}/api/scheduled-tasks`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -248,7 +249,7 @@ function ScheduledTasksManager({ onClose }) {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch(`http://localhost:5000/api/scheduled-tasks/${taskId}`, {
+      const response = await fetch(`${API_BASE_URL}/api/scheduled-tasks/${taskId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -324,7 +325,7 @@ function ScheduledTasksManager({ onClose }) {
     }
 
     try {
-      const response = await fetch(`http://localhost:5000/api/scheduled-tasks/${editingTask._id}`, {
+      const response = await fetch(`${API_BASE_URL}/api/scheduled-tasks/${editingTask._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

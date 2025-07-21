@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
+import { API_BASE_URL } from '../apiConfig';
 import './PlaylistSnapshotsList.css';
 
 function PlaylistSnapshotsList({ youtubePlaylistId, onSelectSnapshotsForComparison, onClose }) {
@@ -27,7 +28,7 @@ function PlaylistSnapshotsList({ youtubePlaylistId, onSelectSnapshotsForComparis
       setLoading(true);
       setError(null);
       try {
-        const response = await fetch(`http://localhost:5000/api/playlists/${youtubePlaylistId}/snapshots`, {
+        const response = await fetch(`${API_BASE_URL}/api/playlists/${youtubePlaylistId}/snapshots`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -79,7 +80,7 @@ function PlaylistSnapshotsList({ youtubePlaylistId, onSelectSnapshotsForComparis
           return;
       }
       try {
-          const response = await fetch(`http://localhost:5000/api/snapshots/${snapshotId}/export`, {
+          const response = await fetch(`${API_BASE_URL}/api/snapshots/${snapshotId}/export`, {
               headers: {
                   'Authorization': `Bearer ${token}`
               }
@@ -163,7 +164,7 @@ function PlaylistSnapshotsList({ youtubePlaylistId, onSelectSnapshotsForComparis
       }
 
       try {
-          const response = await fetch(`http://localhost:5000/api/snapshots/${snapshotId}`, {
+          const response = await fetch(`${API_BASE_URL}/api/snapshots/${snapshotId}`, {
               method: 'DELETE', // <--- IMPORTANT: Use DELETE method
               headers: {
                   'Authorization': `Bearer ${token}`

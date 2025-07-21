@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext'; // <--- NEW: Import useAuth
 import './PlaylistCaptureForm.css';
+import { API_BASE_URL } from '../apiConfig';
 
 function PlaylistCaptureForm({ onPlaylistCaptured }) {
   const [playlistUrl, setPlaylistUrl] = useState('');
@@ -25,7 +26,7 @@ function PlaylistCaptureForm({ onPlaylistCaptured }) {
     }
 
     try {
-      const response = await fetch('http://localhost:5000/api/playlists/capture', {
+      const response = await fetch(`${API_BASE_URL}/api/playlists/capture`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

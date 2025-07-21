@@ -323,7 +323,6 @@ app.post('/api/snapshots/import', protect, async (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
-  console.log(`You can access it at http://localhost:${PORT}`);
 });
 
 app.use('/api/auth', authRoutes);

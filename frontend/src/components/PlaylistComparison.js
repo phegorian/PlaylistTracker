@@ -1,7 +1,8 @@
 // frontend/src/components/PlaylistComparison.js
 
 import React, { useState, useEffect } from 'react';
-import { useAuth } from '../context/AuthContext'; // <--- NEW: Import useAuth
+import { useAuth } from '../context/AuthContext';
+import { API_BASE_URL } from '../apiConfig';
 import './PlaylistComparison.css';
 
 function PlaylistComparison({ snapshotIds, onCloseComparison }) {
@@ -27,7 +28,7 @@ function PlaylistComparison({ snapshotIds, onCloseComparison }) {
         const [id1, id2] = snapshotIds;
 
         const fetchSnapshot = async (id) => {
-            const response = await fetch(`http://localhost:5000/api/snapshots/${id}`, {
+            const response = await fetch(`${API_BASE_URL}/api/snapshots/${id}`, {
                 headers: {
                     'Authorization': `Bearer ${token}` // <--- NEW: Add Authorization header
                 }
