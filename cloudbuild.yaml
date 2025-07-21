@@ -14,7 +14,7 @@ steps:
   - deploy
   - playlist-tracker-backend # Name of your backend Cloud Run service
   - --image=gcr.io/${PROJECT_ID}/playlist-tracker-backend:latest
-  - --region=europe-west2 # <--- CHANGE THIS TO MATCH YOUR TRIGGER REGION
+  - --region=europe-west2
   - --platform=managed
   - --allow-unauthenticated
   - --port=5000
@@ -36,7 +36,7 @@ steps:
   - describe
   - playlist-tracker-backend
   - --platform=managed
-  - --region=europe-west2 # <--- CHANGE THIS TO MATCH YOUR TRIGGER REGION
+  - --region=europe-west2
   - --format=value(status.url)
   - --project=${PROJECT_ID}
   id: Get Backend URL
@@ -44,7 +44,7 @@ steps:
   script: |
     gcloud run services describe playlist-tracker-backend \
       --platform=managed \
-      --region=europe-west2 \ # <--- CHANGE THIS TO MATCH YOUR TRIGGER REGION
+      --region=europe-west2 \
       --format='value(status.url)' \
       --project=${PROJECT_ID} > /workspace/backend_url.txt
 
@@ -52,7 +52,7 @@ steps:
 # 4. Build Frontend Docker Image
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-t', 'gcr.io/${PROJECT_ID}/playlist-tracker-frontend:latest', './frontend']
-  dir: '.' # Execute from the project root
+  dir: '.'
 
 # 5. Deploy Frontend to Cloud Run
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
@@ -62,11 +62,11 @@ steps:
   - deploy
   - playlist-tracker-frontend # Name of your frontend Cloud Run service
   - --image=gcr.io/${PROJECT_ID}/playlist-tracker-frontend:latest
-  - --region=europe-west2 # <--- CHANGE THIS TO MATCH YOUR TRIGGER REGION
+  - --region=europe-west2
   - --platform=managed
   - --allow-unauthenticated
   - --port=80 # Nginx in frontend Dockerfile exposes port 80
-  - --set-env-vars=REACT_APP_API_URL=$(cat /workspace/backend_url.txt) # Pass backend URL to frontend
+  - --set-env-vars=REACT_APP_API_URL=$(cat /workspace/backend_url.txt)
   - --timeout=300
   - --cpu=1
   - --memory=256Mi
@@ -75,9 +75,7 @@ steps:
   - --project=${PROJECT_ID}
   id: Deploy Frontend Service
 
-# Define substitutions for sensitive environment variables
-# These will be passed to Cloud Build as --substitutions (see below)
 substitutions:
-  _DB_URI: ""
-  _JWT_SECRET: ""
-  _YOUTUBE_API_KEY: ""
+  _DB_URI: "mongodb+srv://Verserain:WMkIlGNehps3HVR8@playlisttrackercluster.mgmfxzc.mongodb.net/?retryWrites=true&w=majority&appName=PlaylistTrackerCluster"
+  _JWT_SECRET: "e28ebe55a47120930a70e642fa46e1dd7f0dd0f07fb8d12ba1712c3496e8daf8"
+  _YOUTUBE_API_KEY: "AIzaSyAeKYJpY0IJBQxFfAff-b5lZzVxaZd0TwI"
