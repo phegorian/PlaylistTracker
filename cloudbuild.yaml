@@ -44,15 +44,16 @@ steps:
       --format='value(status.url)' \
       --project=$PROJECT_ID > /workspace/backend_url.txt
 
-
-- name: 'gcr.io/cloud-builders/gcloud'
+# 4. Build Frontend Docker Image
+- name: 'gcr.io/cloud-builders/docker'
   entrypoint: 'bash'
   args:
     - '-c'
     - |
+      BACKEND_URL=$(cat /workspace/backend_url.txt)
       docker build \
         -t gcr.io/${PROJECT_ID}/playlist-tracker-frontend:latest \
-        --build-arg REACT_APP_BACKEND_URL=$(cat /workspace/backend_url.txt) \
+        --build-arg REACT_APP_BACKEND_URL="$BACKEND_URL" \
         ./frontend
   dir: '.'
 
