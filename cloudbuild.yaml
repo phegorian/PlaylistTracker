@@ -81,4 +81,4 @@ substitutions:
   _YOUTUBE_API_KEY: ""
 
 options:
-  logsBucket: gs://playlisttracker-466616_cloudbuild/
+  logging: CLOUD_LOGGING_ONLY
