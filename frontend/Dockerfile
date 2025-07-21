@@ -1,18 +1,23 @@
+# frontend/Dockerfile
+
 # Stage 1: Build the React application
 FROM node:24-alpine AS builder
-
 WORKDIR /app
 
 COPY package*.json ./
-RUN npm install
+RUN npm install --omit=dev
 
 COPY . .
 
-# Build the React app
-# This command creates the 'build' directory with optimized static assets
+# Declare an argument to capture the build-time variable
+ARG REACT_APP_BACKEND_URL
+
+# Set it as an environment variable for the subsequent build commands
+ENV REACT_APP_BACKEND_URL=${REACT_APP_BACKEND_URL}
+
 RUN npm run build
 
-# Stage 2: Serve the React application with Nginx
+# Stage 2: Serve the application with Nginx
 FROM nginx:stable-alpine
 
 # Copy the Nginx configuration
