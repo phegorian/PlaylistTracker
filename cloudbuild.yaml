@@ -14,7 +14,7 @@ steps:
   - deploy
   - playlist-tracker-backend # Name of your backend Cloud Run service
   - --image=gcr.io/${PROJECT_ID}/playlist-tracker-backend:latest
-  - --region=europe-west2
+  - --region=europe-west1
   - --platform=managed
   - --allow-unauthenticated
   - --port=5000
@@ -33,7 +33,7 @@ steps:
   script: |
     gcloud run services describe playlist-tracker-backend \
       --platform=managed \
-      --region=europe-west2 \
+      --region=europe-west1 \
       --format='value(status.url)' \
       --project=${PROJECT_ID} > /workspace/backend_url.txt
 
@@ -51,7 +51,7 @@ steps:
   - deploy
   - playlist-tracker-frontend # Name of your frontend Cloud Run service
   - --image=gcr.io/${PROJECT_ID}/playlist-tracker-frontend:latest
-  - --region=europe-west2
+  - --region=europe-west1
   - --platform=managed
   - --allow-unauthenticated
   - --port=80 # Nginx in frontend Dockerfile exposes port 80
