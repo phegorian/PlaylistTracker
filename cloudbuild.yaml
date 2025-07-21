@@ -50,9 +50,10 @@ steps:
   args:
     - '-c' # Execute the following string as a bash command
     - |
+      BACKEND_URL=$(cat /workspace/backend_url.txt)
       docker build \
         -t gcr.io/${PROJECT_ID}/playlist-tracker-frontend:latest \
-        --build-arg REACT_APP_BACKEND_URL='$(cat /workspace/backend_url.txt)' \
+        --build-arg REACT_APP_BACKEND_URL="$BACKEND_URL" \
         ./frontend
   dir: '.' # Ensure this is '.' if the Dockerfile is in ./frontend
 
