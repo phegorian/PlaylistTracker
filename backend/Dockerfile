@@ -25,6 +25,8 @@ COPY --from=builder /app/routes ./routes
 COPY --from=builder /app/models ./models
 COPY --from=builder /app/middleware ./middleware
 
+RUN ls -R /app
+
 # Expose the port your backend runs on (e.g., 5000)
 EXPOSE 5000
 
