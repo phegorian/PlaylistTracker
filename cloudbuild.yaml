@@ -55,17 +55,17 @@ steps:
   - gcloud
   - run
   - deploy
-  - playlist-tracker-frontend # Name of your frontend Cloud Run service
+  - playlist-tracker-frontend
   - --image=gcr.io/${PROJECT_ID}/playlist-tracker-frontend:latest
   - --region=europe-west1
   - --platform=managed
   - --allow-unauthenticated
-  - --port=80 # Nginx in frontend Dockerfile exposes port 80
+  - --port=80
   - --set-env-vars=REACT_APP_API_URL=$(cat /workspace/backend_url.txt)
-  - --timeout=300
+  - --timeout=900
   - --cpu=1
   - --memory=256Mi
-  - --max-instances=1
+  - --max-instances=2
   - --min-instances=0
   - --project=${PROJECT_ID}
   id: Deploy Frontend Service
