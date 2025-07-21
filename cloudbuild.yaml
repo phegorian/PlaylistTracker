@@ -9,9 +9,9 @@ steps:
 # 1. Explicitly Push Backend Image
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'gcr.io/${PROJECT_ID}/playlist-tracker-backend:latest']
-  id: Push Backend Image # Give this step an ID for clarity
+  id: Push Backend Image
 
-# 2. Deploy Backend to Cloud Run (This step's index will now be 2)
+# 2. Deploy Backend to Cloud Run
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   args:
   - gcloud
@@ -24,7 +24,7 @@ steps:
   - --allow-unauthenticated
   - --port=5000
   - --set-env-vars=DB_URI=${_DB_URI},JWT_SECRET=${_JWT_SECRET},YOUTUBE_API_KEY=${_YOUTUBE_API_KEY}
-  - --timeout=900
+  - --timeout=300
   - --cpu=1
   - --memory=512Mi
   - --max-instances=2
@@ -47,7 +47,13 @@ steps:
 
 # 4. Build Frontend Docker Image
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/${PROJECT_ID}/playlist-tracker-frontend:latest', './frontend']
+  args:
+    - 'build'
+    - '-t'
+    - 'gcr.io/${PROJECT_ID}/playlist-tracker-frontend:latest'
+    - '--build-arg'
+    - 'REACT_APP_BACKEND_URL=$(cat /workspace/backend_url.txt)'
+    - './frontend'
   dir: '.'
 
 # 5. Explicitly Push Frontend Image
@@ -67,7 +73,6 @@ steps:
   - --platform=managed
   - --allow-unauthenticated
   - --port=80
-  - --set-env-vars=REACT_APP_API_URL=$(cat /workspace/backend_url.txt)
   - --timeout=900
   - --cpu=1
   - --memory=256Mi
