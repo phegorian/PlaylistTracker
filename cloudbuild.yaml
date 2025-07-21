@@ -76,6 +76,9 @@ steps:
   id: Deploy Frontend Service
 
 substitutions:
-  _DB_URI: "mongodb+srv://Verserain:WMkIlGNehps3HVR8@playlisttrackercluster.mgmfxzc.mongodb.net/?retryWrites=true&w=majority&appName=PlaylistTrackerCluster"
-  _JWT_SECRET: "e28ebe55a47120930a70e642fa46e1dd7f0dd0f07fb8d12ba1712c3496e8daf8"
-  _YOUTUBE_API_KEY: "AIzaSyAeKYJpY0IJBQxFfAff-b5lZzVxaZd0TwI"
+  _DB_URI: ""
+  _JWT_SECRET: ""
+  _YOUTUBE_API_KEY: ""
+
+options:
+  logsBucket: gs://playlisttracker-466616_cloudbuild/
