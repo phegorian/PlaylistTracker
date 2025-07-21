@@ -3,7 +3,7 @@
 const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken'); // Import jsonwebtoken
-const User = require('../models/User'); // Import our User model
+const User = require('../models/User.js'); // Import our User model
 
 // Helper function to generate a JWT
 const generateToken = (id) => {
