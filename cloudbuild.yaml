@@ -40,7 +40,6 @@ steps:
   - --format=value(status.url)
   - --project=${PROJECT_ID}
   id: Get Backend URL
-  entrypoint: /bin/bash
   script: |
     gcloud run services describe playlist-tracker-backend \
       --platform=managed \
